@@ -16,12 +16,29 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/timeline-style.css">
     <link rel="stylesheet" href="css/hold-action.css">
+    <link rel="stylesheet" href="css/preloader.css">
 </head>
 
+<body>
+    <!-- Cinematic Preloader -->
+    <div id="preloader">
+        <div class="preloader-logo-wrapper">
+            <svg class="base-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Spider-Man Web Hexagon Motif -->
+                <path d="M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z" />
+                <path d="M50 25 L70 38 L70 62 L50 75 L30 62 L30 38 Z" />
+            </svg>
+            <svg class="fill-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z" />
+                <path d="M50 25 L70 38 L70 62 L50 75 L30 62 L30 38 Z" />
+            </svg>
+        </div>
+        <div id="loading-counter" class="preloader-counter">0%</div>
+    </div>
 
 <!-- Cinematic Video Background & Overlay -->
 <div class="video-bg-container">
-    <video id="hero-bg-video" autoplay loop muted playsinline poster="assets/images/hero-poster.jpg">
+    <video id="hero-bg-video" loop muted playsinline poster="assets/images/hero-poster.jpg">
         <source src="assets/videos/trailer.mp4" type="video/mp4">
         <source src="assets/%20videos/trailer.mp4" type="video/mp4">
         Your browser does not support HTML5 background video.
@@ -144,6 +161,7 @@
 <script src="script.js"></script>
 <script src="js/timeline-script.js"></script>
 <script src="js/hold-action.js"></script>
+<script src="js/preloader.js"></script>
 
 <!-- Custom Global Cursor -->
 <div class="custom-cursor">
