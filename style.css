@@ -1,0 +1,650 @@
+/* --- 1. CSS VARIABLES (Design System) --- */
+:root {
+    --spidey-red: #E60012;
+    --spidey-red-glow: rgba(230, 0, 18, 0.6);
+    --spidey-blue: #0A1B3F;
+    --text-main: #F8F9FA;
+    --text-muted: #ADB5BD;
+    
+    /* Glassmorphism Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(16px);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    
+    /* Typography */
+    --font-heading: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* --- 2. RESET & BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background-color: #050505;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* --- 3. CINEMATIC VIDEO BACKGROUND & OVERLAY --- */
+.video-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.video-bg-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: brightness(0.85) contrast(1.1);
+}
+
+/* Dark Gradient & Vignette Overlay for Crisp Readability */
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at center, rgba(5, 5, 5, 0.35) 0%, rgba(5, 5, 5, 0.85) 100%),
+        linear-gradient(180deg, rgba(5, 5, 5, 0.75) 0%, rgba(5, 5, 5, 0.3) 50%, rgba(5, 5, 5, 0.95) 100%);
+    z-index: 1;
+}
+
+/* --- 3.1 SLEEK AUDIO TOGGLE BUTTON --- */
+.audio-toggle-btn {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.4rem;
+    background: rgba(15, 15, 20, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    color: #ffffff;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.audio-toggle-btn:hover {
+    background: rgba(230, 0, 18, 0.25);
+    border-color: rgba(230, 0, 18, 0.6);
+    box-shadow: 0 0 25px rgba(230, 0, 18, 0.4);
+    transform: translateY(-2px) scale(1.03);
+}
+
+.audio-toggle-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Sound Wave / Equalizer Bars */
+.sound-wave {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 14px;
+    width: 16px;
+}
+
+.sound-wave .bar {
+    width: 3px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    transition: height 0.3s ease, background-color 0.3s ease;
+}
+
+/* Default Muted State (Low bars) */
+.sound-wave .bar-1 { height: 30%; }
+.sound-wave .bar-2 { height: 60%; }
+.sound-wave .bar-3 { height: 40%; }
+.sound-wave .bar-4 { height: 75%; }
+
+/* Active Playing State Equalizer Pulse */
+.audio-toggle-btn.is-playing {
+    background: rgba(230, 0, 18, 0.2);
+    border-color: rgba(230, 0, 18, 0.5);
+    box-shadow: 0 0 20px rgba(230, 0, 18, 0.3);
+}
+
+.audio-toggle-btn.is-playing .sound-wave .bar {
+    background-color: var(--spidey-red, #E60012);
+    animation: soundWavePulse 1.2s ease-in-out infinite alternate;
+}
+
+.audio-toggle-btn.is-playing .sound-wave .bar-1 { animation-delay: 0.1s; }
+.audio-toggle-btn.is-playing .sound-wave .bar-2 { animation-delay: 0.3s; }
+.audio-toggle-btn.is-playing .sound-wave .bar-3 { animation-delay: 0.2s; }
+.audio-toggle-btn.is-playing .sound-wave .bar-4 { animation-delay: 0.4s; }
+
+@keyframes soundWavePulse {
+    0% { height: 20%; }
+    50% { height: 100%; }
+    100% { height: 35%; }
+}
+
+/* --- 4. GLASSMORPHISM NAVIGATION --- */
+.glass-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    color: var(--spidey-red);
+    text-shadow: 0 0 10px var(--spidey-red-glow);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--spidey-red);
+    text-shadow: 0 0 8px var(--spidey-red-glow);
+}
+
+/* --- 5. REUSABLE COMPONENTS --- */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    color: var(--text-main);
+}
+
+.title-underline {
+    height: 4px;
+    width: 60px;
+    background: var(--spidey-red);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--spidey-red-glow);
+}
+
+/* --- 6. HERO SECTION --- */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem 2rem;
+}
+
+.hero-content {
+    padding: 3.5rem;
+    max-width: 700px;
+}
+
+.release-date {
+    color: var(--spidey-red);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px var(--spidey-red-glow);
+}
+
+.movie-title {
+    font-family: var(--font-heading);
+    font-size: 5.5rem;
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.title-highlight {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text-main);
+    background: linear-gradient(to right, var(--spidey-red), #ff4d4d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 4px 30px var(--spidey-red-glow);
+}
+
+.movie-tagline {
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.movie-synopsis {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    max-width: 95%;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+}
+
+.time-value {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--spidey-red);
+    text-shadow: 0 0 10px var(--spidey-red-glow);
+}
+
+.time-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* --- 7. BUTTONS --- */
+.cta-group {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.btn-primary {
+    position: relative;
+    padding: 1rem 3rem;
+    background: var(--spidey-red);
+    color: white;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    border: none;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 15px var(--spidey-red-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    background: #ff1a2b;
+    box-shadow: 0 8px 25px rgba(230, 0, 18, 0.8);
+}
+
+.btn-secondary {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 5px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    border-color: var(--spidey-red);
+    color: var(--spidey-red);
+}
+
+/* --- 8. TRAILER SECTION --- */
+.trailer-section {
+    padding: 6rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.trailer-container {
+    padding: 1rem;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- 9. CAST SECTION --- */
+.cast-section {
+    padding: 6rem 2rem 8rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.cast-card {
+    padding: 1.5rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.cast-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    border-color: rgba(230, 0, 18, 0.3);
+}
+
+.cast-image {
+    width: 100%;
+    height: 350px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative placeholder overlay */
+.cast-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 50%, rgba(10,27,63,0.4) 100%);
+}
+
+.cast-info {
+    text-align: center;
+}
+
+.character-name {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.actor-name {
+    color: var(--spidey-red);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+}
+
+/* --- 10. SCROLL REVEAL ANIMATIONS --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 11. RESPONSIVE DESIGN --- */
+@media (max-width: 992px) {
+    .movie-title { font-size: 4.5rem; }
+    .hero-content { padding: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+    .movie-title { font-size: 3.5rem; }
+    .hero-section { padding-top: 7rem; }
+    .cta-group { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .btn-primary { width: 100%; text-align: center; }
+    
+    .countdown-timer { flex-wrap: wrap; justify-content: flex-start; }
+    .time-block { flex: 1; min-width: 70px; }
+    
+    .cast-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .nav-links { display: none; }
+    .movie-title { font-size: 3rem; }
+    .hero-content { padding: 2rem; }
+    
+    .time-value { font-size: 2rem; }
+    .section-title { font-size: 2.5rem; }
+}
+
+/* --- 12. TIMELINE PAGE --- */
+.timeline-section {
+    padding: 6rem 2rem 8rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* Vertical Line */
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: linear-gradient(to bottom, transparent, var(--spidey-red) 15%, var(--spidey-blue) 85%, transparent);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    width: 100%;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Left side items */
+.timeline-item.left {
+    justify-content: flex-start;
+}
+
+.timeline-content {
+    width: calc(50% - 3rem);
+    padding: 2.5rem;
+    position: relative;
+}
+
+/* The Timeline Dot */
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    top: 3rem;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background: #050505;
+    border: 4px solid var(--spidey-red);
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 15px var(--spidey-red-glow);
+}
+
+.pulse-dot {
+    animation: pulseGlow 2s infinite;
+    background: var(--spidey-red);
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(230, 0, 18, 0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(230, 0, 18, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(230, 0, 18, 0); }
+}
+
+.timeline-date {
+    font-family: var(--font-heading);
+    color: var(--spidey-red);
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.timeline-text {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.highlight-event {
+    border-color: rgba(230, 0, 18, 0.4);
+    box-shadow: 0 10px 40px rgba(230, 0, 18, 0.15);
+}
+
+/* Timeline Responsive Design */
+@media (max-width: 768px) {
+    .timeline-line {
+        left: 30px;
+        transform: none;
+    }
+    
+    .timeline-item, .timeline-item.left {
+        justify-content: flex-end;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 70px);
+        padding: 2rem;
+    }
+    
+    .timeline-dot {
+        left: 32px;
+    }
+}
+
+/* --- SPIDER-MAN EASTER EGG --- */
+.nav-container {
+    position: relative;
+}
+
+#spidey-drop-container {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.web-string {
+    width: 2px;
+    height: 0px; /* GSAP will animate to 120px */
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), #fff);
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8), 0 0 20px 5px rgba(255, 255, 255, 0.5);
+}
+
+#spidey-hanging {
+    width: 150px;
+    transform: translateY(-300px); /* Initially hidden out of frame */
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
+}

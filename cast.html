@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cast | Spider-Man: Brand New Day</title>
+
+    <!-- Cinematic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css"> <!-- Fallback global styles -->
+    <link rel="stylesheet" href="css/cast-style.css">
+</head>
+
+<body>
+    <!-- Sleek Audio Controller Button -->
+    <button id="audio-toggle-btn" class="audio-toggle-btn" aria-label="Toggle Background Audio" style="z-index: 1000;">
+        <span class="sound-wave" aria-hidden="true">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+            <span class="bar bar-4"></span>
+        </span>
+        <span class="audio-btn-text">UNMUTE SOUND</span>
+    </button>
+    <audio id="bg-audio" src="assets/audio/soundtrack.mp3" loop preload="auto"></audio>
+
+    <!-- Glowing Back Button -->
+    <a href="index.html" class="btn-back">
+        <span class="btn-text">← Back to Home</span>
+        <span class="btn-glow"></span>
+    </a>
+
+    <!-- Instructional text for user (Moved outside mask so it is always visible) -->
+    <div class="instruction">
+        <span class="red-glow-text">MOVE YOUR CURSOR TO SEE CAST</span>
+    </div>
+
+    <!-- The Spotlight Darkroom Section -->
+    <section id="darkroom-section">
+
+        <!-- The Cast Grid -->
+        <div class="cast-grid">
+            <div class="cast-card">
+                <div class="img-wrapper">
+                    <img src="assets/images/cast1.jpg" alt="Tom Holland">
+                </div>
+                <div class="cast-info">
+                    <h3>Tom Holland</h3>
+                    <p>Peter Parker</p>
+                </div>
+            </div>
+            <div class="cast-card">
+                <div class="img-wrapper">
+                    <img src="assets/images/cast2.jpg" alt="Zendaya">
+                </div>
+                <div class="cast-info">
+                    <h3>Zendaya</h3>
+                    <p>MJ</p>
+                </div>
+            </div>
+            <div class="cast-card">
+                <div class="img-wrapper">
+                    <img src="assets/images/cast3.jpg" alt="Mark Ruffalo">
+                </div>
+                <div class="cast-info">
+                    <h3>Mark Ruffalo</h3>
+                    <p>Bruce Banner</p>
+                </div>
+            </div>
+            <div class="cast-card">
+                <div class="img-wrapper">
+                    <img src="assets/images/cast4.jpg" alt="Jacob Batalon">
+                </div>
+                <div class="cast-info">
+                    <h3>Jacob Batalon</h3>
+                    <p>Ned Leeds</p>
+                </div>
+            </div>
+            <div class="cast-card">
+                <div class="img-wrapper">
+                    <img src="assets/images/cast5.jpg" alt="Jon Bernthal">
+                </div>
+                <div class="cast-info">
+                    <h3>Jon Bernthal</h3>
+                    <p>The Punisher</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="js/cast-script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+/* --- SPOTLIGHT DARKROOM STYLES --- */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #030303;
+    /* Pure pitch black base */
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    cursor: none;
+    /* Hide default cursor to enhance the flashlight illusion */
+}
+
+#darkroom-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 
+       THE MAGIC MASK: 
+       Defaults to center if variables aren't set.
+       Reveals a 350px circle exactly at the --x and --y coordinates.
+       Fades smoothly to transparent (which hides the rest of the div).
+    */
+    --x: 50vw;
+    --y: 50vh;
+
+    -webkit-mask-image: radial-gradient(circle 350px at var(--x) var(--y),
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.8) 40%,
+            rgba(0, 0, 0, 0) 80%);
+    mask-image: radial-gradient(circle 350px at var(--x) var(--y),
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.8) 40%,
+            rgba(0, 0, 0, 0) 80%);
+
+    background-color: #0a0a0c;
+}
+
+/* Add a subtle background texture to the revealed area to feel cinematic */
+#darkroom-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.08%22/%3E%3C/svg%3E');
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Cast Grid Layout */
+.cast-grid {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    gap: 3rem;
+    padding: 2rem;
+    align-items: center;
+}
+
+.cast-card {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Image styling */
+.img-wrapper {
+    width: 240px;
+    height: 360px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(80%) contrast(1.2);
+    /* Moody base styling */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+/* Hover Micro-interactions */
+.cast-card:hover .img-wrapper img {
+    transform: scale(1.08);
+    filter: grayscale(0%) contrast(1);
+    /* Reveal full color on hover */
+}
+
+.cast-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    margin: 0 0 0.2rem 0;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: color 0.3s ease;
+}
+
+.cast-info p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #E60012;
+    /* Spidey Red */
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cast-card:hover .cast-info h3 {
+    color: #E60012;
+}
+
+/* Instructional Text - Red Glow */
+.instruction {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.red-glow-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    color: #ff3333;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #aa0000;
+    opacity: 0.6;
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from {
+        opacity: 0.4;
+        text-shadow: 0 0 5px #ff0000, 0 0 10px #aa0000;
+    }
+
+    to {
+        opacity: 0.8;
+        text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000, 0 0 50px #aa0000;
+    }
+}
+
+/* Back Button */
+.btn-back {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background: rgba(230, 0, 18, 0.1);
+    border: 1px solid rgba(230, 0, 18, 0.5);
+    border-radius: 4px;
+    text-decoration: none;
+    color: #E60012;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    z-index: 100;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(230, 0, 18, 0.3);
+}
+
+.btn-back:hover {
+    background: rgba(230, 0, 18, 0.2);
+    box-shadow: 0 0 25px rgba(230, 0, 18, 0.6);
+    transform: scale(1.05);
+    color: #fff;
+    border-color: #E60012;
+}
+
+.btn-back .btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-back .btn-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(230, 0, 18, 0.8) 0%, rgba(230, 0, 18, 0) 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.btn-back:hover .btn-glow {
+    width: 150px;
+    height: 150px;
+}

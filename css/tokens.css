@@ -1,0 +1,56 @@
+:root {
+  /* Color palette */
+  --color-void: #05070c;
+  --color-ink: #0b0e14;
+  --color-paper: #e4e7ec;
+  --color-paper-dim: #8b93a3;
+  --color-spidey-red: #d6293e;
+  --color-spidey-red-glow: #ff3b52;
+  --color-spidey-blue: #1b4b91;
+  --color-spidey-blue-glow: #2f6fd6;
+  --color-moon: #f2ead2;
+
+  /* Glassmorphism tokens */
+  --glass-bg: rgba(20,24,34,0.45);
+  --glass-border: rgba(228,231,236,0.12);
+  --glass-blur: 18px;
+
+  /* Typography */
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Fluid type scale */
+  --fs-hero: clamp(3rem, 10vw, 8rem);
+  --fs-h1: clamp(2.5rem, 6vw, 4.5rem);
+  --fs-h2: clamp(2rem, 4vw, 3rem);
+  --fs-body: clamp(1rem, 1.2vw, 1.125rem);
+  --fs-caption: clamp(0.75rem, 1vw, 0.875rem);
+
+  /* Spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-10: 5rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+
+  /* Motion tokens */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-swing: cubic-bezier(0.68, -0.15, 0.27, 1.15);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 800ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

@@ -1,0 +1,41 @@
+/* css/base.css */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles on ul, ol elements */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Body setup */
+body {
+  background-color: var(--color-void);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessibility: Visible focus outline */
+*:focus-visible {
+  outline: 2px solid var(--color-spidey-red-glow);
+  outline-offset: 4px;
+}

@@ -1,0 +1,169 @@
+/* --- ORBIT TIMELINE SECTION --- */
+#orbit-timeline {
+    height: 100vh;
+    width: 100vw;
+    background-color: #030303;
+    /* Solid pitch-black to cover the Hero video */
+    position: relative;
+    z-index: 2;
+    /* Ensure it stays above the hero background */
+    border-top: 2px solid rgba(230, 0, 18, 0.4);
+    /* Subtle red glow border separating sections */
+    box-shadow: 0 -30px 60px rgba(0, 0, 0, 1);
+    /* Heavy shadow to blend into the darkness */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px;
+}
+
+/* Master 3D Scene Container */
+.scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    /* CRITICAL: Enables 3D sorting for siblings */
+}
+
+/* Center Suit Setup */
+.center-suit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* translateZ(0px) anchors it exactly in the middle of the 3D depth */
+    transform: translate(-50%, -50%) translateZ(0px);
+    height: 85vh;
+    /* Massive height so it peeks above/below the posters */
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+/* 3D Carousel Container */
+.carousel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    /* Vertical movie poster width */
+    height: 300px;
+    /* Vertical movie poster height */
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    /* CRITICAL: Passes 3D space to the posters */
+}
+
+/* The Orbiting Posters */
+.poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+
+    /* 
+       DISTRIBUTION MATH:
+       We rotate each poster by its CSS variable (--r), then push it OUTWARDS 
+       by 300px. This creates a tight orbit around the suit.
+    */
+    transform: rotateY(var(--r)) translateZ(300px);
+}
+
+.poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Movie Title styling below orbit */
+.movie-info-container {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 100;
+}
+
+.active-movie-title {
+    font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+    font-size: 3rem;
+    color: var(--text-main, #F8F9FA);
+    letter-spacing: 2px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* --- VERTICAL TIMELINE TRACKER --- */
+.timeline-tracker-container {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60vh;
+    width: 60px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tracker-line {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.spider-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 3;
+    transform: translateY(-50%);
+    box-shadow: 0 0 15px 5px rgba(230, 0, 18, 0.6);
+    border: 2px solid var(--spidey-red, #E60012);
+    transition: box-shadow 0.3s ease;
+}
+
+.date-stops {
+    position: absolute;
+    left: 45px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    z-index: 2;
+}
+
+.date-stop {
+    font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+    font-size: 1.2rem;
+    color: var(--text-main, #F8F9FA);
+    opacity: 0.3;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    letter-spacing: 2px;
+}
+
+.date-stop.active {
+    opacity: 1;
+    color: var(--spidey-red, #E60012);
+    text-shadow: 0 0 10px rgba(230, 0, 18, 0.8);
+}
