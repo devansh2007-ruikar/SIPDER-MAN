@@ -36,6 +36,15 @@ body {
     line-height: 1.6;
 }
 
+/* --- High-Quality Image Rendering Fixes --- */
+img {
+    image-rendering: high-quality;
+    image-rendering: -webkit-optimize-contrast;
+    object-fit: cover;
+    transform: translateZ(0); /* Hardware acceleration for crisp edges */
+    max-width: 100%;
+}
+
 /* --- 3. CINEMATIC VIDEO BACKGROUND & OVERLAY --- */
 .video-bg-container {
     position: absolute;
