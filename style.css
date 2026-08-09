@@ -846,3 +846,346 @@ body {
     display: block;
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
 }
+
+/* --- LEGACY TRANSITION SECTION --- */
+#legacy-transition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+/* --- Particle Canvas --- */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Wrapper keeps logo + text co-centered so the watermark sits right behind the heading */
+.legacy-center {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Rising Logo Watermark (RED) --- */
+.legacy-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(100px);
+    width: 45vmin;
+    max-width: 420px;
+    height: auto;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    /* CSS filter chain to tint the logo Spider-Man red */
+    filter: brightness(0) saturate(100%) invert(12%) sepia(95%) saturate(6500%) hue-rotate(358deg) brightness(100%) contrast(115%);
+    /* Start invisible; GSAP animates opacity to 0.2 and Y to 0 */
+}
+
+/* --- Glitch Title --- */
+.legacy-title {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #e60000;
+    text-shadow:
+        0 0 10px rgba(230, 0, 0, 0.9),
+        0 0 25px rgba(230, 0, 0, 0.6),
+        0 0 50px rgba(230, 0, 0, 0.3),
+        0 0 80px rgba(230, 0, 0, 0.15);
+    animation: glitch-flicker 3s infinite;
+    max-width: 90vw;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0.5em 0;
+}
+
+/* Pseudo-element glitch layers */
+.legacy-title::before,
+.legacy-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.legacy-title::before {
+    color: #ff3333;
+    z-index: -1;
+    text-shadow: 0 0 10px rgba(255, 50, 50, 0.8);
+    animation: glitch-layer-top 3s infinite linear;
+}
+
+.legacy-title::after {
+    color: #ffffff;
+    z-index: -2;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+    animation: glitch-layer-bottom 3s infinite linear;
+}
+
+/* ============================================
+   AGGRESSIVE GLITCH KEYFRAMES
+   Two glitch bursts per 3s cycle (~30% and ~75%)
+   ============================================ */
+
+/* Main text: color flicker between red and white */
+@keyframes glitch-flicker {
+    0%, 100% {
+        color: #e60000;
+        text-shadow:
+            0 0 10px rgba(230, 0, 0, 0.9),
+            0 0 25px rgba(230, 0, 0, 0.6),
+            0 0 50px rgba(230, 0, 0, 0.3);
+        transform: translate(0) skewX(0deg);
+    }
+    /* --- BURST 1 --- */
+    28% { color: #e60000; transform: translate(0); }
+    29% {
+        color: #ffffff;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.95), 0 0 60px rgba(255, 255, 255, 0.4);
+        transform: translate(-4px, 0) skewX(-2deg);
+    }
+    30% {
+        color: #e60000;
+        transform: translate(6px, 1px) skewX(1deg);
+    }
+    31% {
+        color: #ffffff;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.95), 0 0 60px rgba(255, 255, 255, 0.4);
+        transform: translate(-3px, -1px) skewX(-1.5deg);
+    }
+    32% {
+        color: #ff1a1a;
+        transform: translate(5px, 0) skewX(2deg);
+    }
+    33% {
+        color: #ffffff;
+        transform: translate(-2px, 1px);
+    }
+    34% {
+        color: #e60000;
+        transform: translate(0) skewX(0deg);
+        text-shadow:
+            0 0 10px rgba(230, 0, 0, 0.9),
+            0 0 25px rgba(230, 0, 0, 0.6),
+            0 0 50px rgba(230, 0, 0, 0.3);
+    }
+    /* --- BURST 2 --- */
+    73% { color: #e60000; transform: translate(0); }
+    74% {
+        color: #ffffff;
+        text-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+        transform: translate(5px, -1px) skewX(3deg);
+    }
+    75% {
+        color: #ff0000;
+        transform: translate(-7px, 1px) skewX(-2deg);
+    }
+    76% {
+        color: #ffffff;
+        transform: translate(3px, 0) skewX(1deg);
+    }
+    77% {
+        color: #e60000;
+        transform: translate(-4px, -1px) skewX(-1deg);
+    }
+    78% {
+        color: #ffffff;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+        transform: translate(6px, 1px) skewX(2deg);
+    }
+    79% {
+        color: #e60000;
+        transform: translate(0) skewX(0deg);
+        text-shadow:
+            0 0 10px rgba(230, 0, 0, 0.9),
+            0 0 25px rgba(230, 0, 0, 0.6),
+            0 0 50px rgba(230, 0, 0, 0.3);
+    }
+}
+
+/* Top slice — clips upper portion and shifts it */
+@keyframes glitch-layer-top {
+    0%, 100% {
+        clip-path: inset(0 0 100% 0);
+        transform: translate(0);
+        opacity: 0;
+    }
+    28% { clip-path: inset(0 0 100% 0); opacity: 0; }
+    29% {
+        clip-path: inset(10% 0 50% 0);
+        transform: translate(8px, 0);
+        opacity: 1;
+    }
+    30% {
+        clip-path: inset(0% 0 70% 0);
+        transform: translate(-6px, -1px);
+        opacity: 0.9;
+    }
+    31% {
+        clip-path: inset(20% 0 40% 0);
+        transform: translate(5px, 1px);
+        opacity: 1;
+    }
+    32% {
+        clip-path: inset(5% 0 60% 0);
+        transform: translate(-8px, 0);
+        opacity: 0.8;
+    }
+    34% {
+        clip-path: inset(0 0 100% 0);
+        transform: translate(0);
+        opacity: 0;
+    }
+    73% { clip-path: inset(0 0 100% 0); opacity: 0; }
+    74% {
+        clip-path: inset(15% 0 45% 0);
+        transform: translate(-7px, 1px);
+        opacity: 1;
+    }
+    75% {
+        clip-path: inset(5% 0 65% 0);
+        transform: translate(9px, 0);
+        opacity: 0.9;
+    }
+    76% {
+        clip-path: inset(25% 0 35% 0);
+        transform: translate(-5px, -1px);
+        opacity: 1;
+    }
+    78% {
+        clip-path: inset(10% 0 55% 0);
+        transform: translate(6px, 0);
+        opacity: 0.7;
+    }
+    79% {
+        clip-path: inset(0 0 100% 0);
+        transform: translate(0);
+        opacity: 0;
+    }
+}
+
+/* Bottom slice — clips lower portion and shifts opposite */
+@keyframes glitch-layer-bottom {
+    0%, 100% {
+        clip-path: inset(100% 0 0 0);
+        transform: translate(0);
+        opacity: 0;
+    }
+    28% { clip-path: inset(100% 0 0 0); opacity: 0; }
+    29% {
+        clip-path: inset(55% 0 10% 0);
+        transform: translate(-6px, 1px);
+        opacity: 0.9;
+    }
+    30% {
+        clip-path: inset(65% 0 5% 0);
+        transform: translate(7px, 0);
+        opacity: 1;
+    }
+    31% {
+        clip-path: inset(45% 0 20% 0);
+        transform: translate(-9px, -1px);
+        opacity: 0.8;
+    }
+    32% {
+        clip-path: inset(60% 0 15% 0);
+        transform: translate(5px, 1px);
+        opacity: 1;
+    }
+    34% {
+        clip-path: inset(100% 0 0 0);
+        transform: translate(0);
+        opacity: 0;
+    }
+    73% { clip-path: inset(100% 0 0 0); opacity: 0; }
+    74% {
+        clip-path: inset(50% 0 15% 0);
+        transform: translate(8px, -1px);
+        opacity: 0.9;
+    }
+    75% {
+        clip-path: inset(60% 0 5% 0);
+        transform: translate(-7px, 1px);
+        opacity: 1;
+    }
+    76% {
+        clip-path: inset(40% 0 25% 0);
+        transform: translate(6px, 0);
+        opacity: 0.9;
+    }
+    78% {
+        clip-path: inset(55% 0 10% 0);
+        transform: translate(-8px, 1px);
+        opacity: 0.7;
+    }
+    79% {
+        clip-path: inset(100% 0 0 0);
+        transform: translate(0);
+        opacity: 0;
+    }
+}
+
+/* --- Bouncing Scroll Arrow --- */
+.scroll-arrow {
+    position: relative;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.7);
+    animation: bounce 2s infinite ease-in-out;
+    transition: color 0.3s ease;
+}
+
+.scroll-arrow:hover {
+    color: #e60000;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(18px);
+    }
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    #legacy-transition {
+        padding: 1.5rem;
+    }
+
+    .legacy-title {
+        font-size: clamp(1.4rem, 6vw, 2.5rem);
+        letter-spacing: 2px;
+    }
+
+    .legacy-watermark {
+        width: 65vmin;
+    }
+}
+

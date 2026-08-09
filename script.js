@@ -283,6 +283,35 @@ const initHamburgerMenu = () => {
     });
 };
 
+// --- 6. LEGACY TRANSITION WATERMARK (GSAP ScrollTrigger) ---
+const initLegacyTransition = () => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const watermark = document.querySelector('.legacy-watermark');
+    if (!watermark) return;
+
+    gsap.fromTo(watermark,
+        {
+            y: 100,
+            opacity: 0
+        },
+        {
+            y: 0,
+            opacity: 0.2,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#legacy-transition',
+                start: 'top 80%',
+                end: 'center center',
+                toggleActions: 'play none none reverse'
+            }
+        }
+    );
+};
+
 // Initialize when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     initCountdown();
@@ -290,4 +319,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initSpideyEasterEgg();
     initAudioToggle();
     initHamburgerMenu();
+    initLegacyTransition();
 });
