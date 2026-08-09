@@ -204,6 +204,47 @@ body {
     text-shadow: 0 0 8px var(--spidey-red-glow);
 }
 
+/* --- HAMBURGER MENU (Hidden on Desktop) --- */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 101;
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-main, #F8F9FA);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+/* Animate into X when active */
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: var(--spidey-red, #E60012);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: var(--spidey-red, #E60012);
+}
+
 /* --- 5. REUSABLE COMPONENTS --- */
 .glass-card {
     background: var(--glass-bg);
@@ -488,10 +529,62 @@ body {
     .time-block { flex: 1; min-width: 70px; }
     
     .cast-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    /* Hide desktop nav links for hamburger menu */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(5, 5, 5, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+        gap: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        transition: background 0.2s ease, color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        background: rgba(230, 0, 18, 0.15);
+    }
+
+    /* Hamburger icon visible on mobile */
+    .hamburger-menu {
+        display: flex !important;
+    }
+
+    /* Nuke cast shadows on mobile */
+    .cast-card {
+        box-shadow: none !important;
+    }
+    .cast-card:hover {
+        box-shadow: none !important;
+    }
+    .cast-image::after {
+        display: none !important;
+        background: transparent !important;
+    }
 }
 
 @media (max-width: 480px) {
-    .nav-links { display: none; }
     .movie-title { font-size: 3rem; }
     .hero-content { padding: 2rem; }
     

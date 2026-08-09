@@ -208,3 +208,122 @@ html {
     width: 150px;
     height: 150px;
 }
+
+/* =============================================
+   MOBILE FIX: Aggressively nuke ALL shadows,
+   masks, overlays, and dark filters on mobile.
+   Desktop is completely unaffected.
+   ============================================= */
+@media (max-width: 768px) {
+
+    /* --- Body: restore cursor & soften background --- */
+    body, html {
+        cursor: auto !important;
+        background-color: #0a0a0c !important;
+    }
+
+    /* --- Darkroom: kill the mask & dark bg entirely --- */
+    #darkroom-section {
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        background-color: transparent !important;
+        background-image: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        height: auto !important;
+    }
+
+    /* Kill the noise texture pseudo-element */
+    #darkroom-section::before,
+    #darkroom-section::after {
+        display: none !important;
+        content: none !important;
+        background: none !important;
+        box-shadow: none !important;
+        opacity: 0 !important;
+    }
+
+    /* --- Cast Grid: make it scroll-friendly --- */
+    .cast-grid {
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding: 1rem !important;
+    }
+
+    /* --- Cards: kill every shadow & overlay --- */
+    .cast-card {
+        box-shadow: none !important;
+        text-shadow: none !important;
+        width: 100% !important;
+        max-width: 280px !important;
+    }
+
+    .cast-card::before,
+    .cast-card::after {
+        display: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    /* --- Image Wrapper: no shadow, no border glow --- */
+    .img-wrapper {
+        box-shadow: none !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .img-wrapper::before,
+    .img-wrapper::after {
+        display: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    /* --- Images: remove moody grayscale filter --- */
+    .img-wrapper img {
+        filter: none !important;
+        box-shadow: none !important;
+    }
+
+    /* --- Text: kill all text-shadows --- */
+    .cast-info h3,
+    .cast-info p,
+    .cast-card h3,
+    .cast-card p,
+    .character-name,
+    .actor-name {
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    /* --- Instruction text: hide completely --- */
+    .instruction,
+    .red-glow-text {
+        display: none !important;
+        opacity: 0 !important;
+        text-shadow: none !important;
+    }
+
+    /* --- Back button: clean up glow --- */
+    .btn-back {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    .btn-back .btn-glow {
+        display: none !important;
+        background: transparent !important;
+    }
+
+    .btn-back:hover {
+        box-shadow: none !important;
+    }
+
+    /* --- Catch-all: nuke shadows on any child --- */
+    #darkroom-section *,
+    #darkroom-section *::before,
+    #darkroom-section *::after {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+}

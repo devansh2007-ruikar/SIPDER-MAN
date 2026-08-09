@@ -102,6 +102,46 @@ body {
     color: var(--spidey-red);
 }
 
+/* --- HAMBURGER MENU (Hidden on Desktop) --- */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 101;
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-main, #F8F9FA);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: var(--spidey-red, #E60012);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: var(--spidey-red, #E60012);
+}
+
 /* --- 5. HERO SECTION & GLASS CARD --- */
 .hero-section {
     min-height: 100vh;
@@ -238,16 +278,51 @@ body {
         width: 100%;
         text-align: center;
     }
+
+    /* Hamburger visible on mobile */
+    .hamburger-menu {
+        display: flex !important;
+    }
+
+    /* Mobile nav dropdown */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(5, 5, 5, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+        gap: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    .nav-links a:hover {
+        background: rgba(230, 0, 18, 0.15);
+    }
 }
 
 @media (max-width: 480px) {
     .movie-title {
         font-size: 2.8rem;
-    }
-
-    .nav-links {
-        display: none;
-        /* We will add a hamburger menu later */
     }
 
     .glass-card {

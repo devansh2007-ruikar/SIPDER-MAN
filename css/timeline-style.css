@@ -167,3 +167,10 @@
     color: var(--spidey-red, #E60012);
     text-shadow: 0 0 10px rgba(230, 0, 18, 0.8);
 }
+
+/* Mobile Fix: Disable shadows and overlays */
+@media (max-width: 768px) {
+    #orbit-timeline, .poster, .spider-indicator {
+        box-shadow: none !important;
+    }
+}

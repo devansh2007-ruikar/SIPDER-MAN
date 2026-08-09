@@ -262,10 +262,32 @@ const initAudioToggle = () => {
 
 
 
+// --- 5. HAMBURGER MENU TOGGLE ---
+const initHamburgerMenu = () => {
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (!hamburger || !navLinks) return;
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is tapped
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+};
+
 // Initialize when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     initCountdown();
     initScrollReveal();
     initSpideyEasterEgg();
     initAudioToggle();
+    initHamburgerMenu();
 });
