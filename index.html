@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spider-Man: Brand New Day | Official Movie Site</title>
 
+    <!-- Anti-flash: hide preloader before first paint on return visits -->
+    <script>
+        if (sessionStorage.getItem('preloaderShown') === 'true') {
+            document.documentElement.classList.add('skip-preloader');
+        }
+    </script>
+    <style>
+        html.skip-preloader #preloader {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+    </style>
+
     <!-- Cinematic Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

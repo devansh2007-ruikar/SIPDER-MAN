@@ -7,9 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!preloader || !counterEl || !clipRect) return;
 
-    // GSAP timeline driving fill and counter
+    // --- RETURNING VISIT: Skip preloader entirely ---
+    if (sessionStorage.getItem('preloaderShown') === 'true') {
+        preloader.style.display = 'none';
+        preloader.remove();
+        if (heroVideo) {
+            heroVideo.play().catch(() => {});
+        }
+        return;
+    }
+
+    // --- FIRST VISIT: Run the full spider-fill animation ---
     const tl = gsap.timeline({
         onComplete: () => {
+            // Mark as shown so it never runs again this session
+            sessionStorage.setItem('preloaderShown', 'true');
+
             // Fade out overlay
             preloader.classList.add("hidden");
             // Start video after fade

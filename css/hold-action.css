@@ -50,3 +50,14 @@ body {
 a, button {
     cursor: none !important;
 }
+
+/* MOBILE: Restore normal cursor & hide custom cursor element */
+@media (max-width: 768px) {
+    body, a, button {
+        cursor: auto !important;
+    }
+
+    .custom-cursor {
+        display: none !important;
+    }
+}

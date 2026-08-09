@@ -582,6 +582,102 @@ body {
         display: none !important;
         background: transparent !important;
     }
+
+    /* ===== 1. HANGING SPIDER-MAN: Shrink drastically ===== */
+    #spidey-drop-container {
+        transform: scale(0.35) !important;
+        transform-origin: top right !important;
+        right: 2% !important;
+    }
+
+    #spidey-hanging {
+        width: 40px !important;
+    }
+
+    .web-string {
+        box-shadow: none !important;
+    }
+
+    /* ===== 2. AUDIO BUTTON: Small fixed circle ===== */
+    .audio-toggle-btn {
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 999 !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        border-radius: 50% !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0 !important;
+    }
+
+    .audio-toggle-btn .audio-btn-text {
+        display: none !important;
+    }
+
+    .audio-toggle-btn .sound-wave {
+        width: 14px !important;
+        height: 12px !important;
+    }
+
+    /* ===== 3. NAVBAR: Compact height & fonts ===== */
+    .glass-nav {
+        padding: 0.6rem 0 !important;
+    }
+
+    .nav-container {
+        padding: 0 1rem !important;
+    }
+
+    .logo {
+        font-size: 1.5rem !important;
+    }
+
+    /* ===== 4. HERO GLASS CARD: Scale down for mobile ===== */
+    .hero-content {
+        padding: 1.5rem !important;
+        max-width: 92vw !important;
+    }
+
+    .hero-section {
+        padding: 5rem 0.75rem 2rem 0.75rem !important;
+        min-height: auto !important;
+    }
+
+    .movie-title {
+        font-size: 2.8rem !important;
+    }
+
+    .movie-tagline {
+        font-size: 1.1rem !important;
+    }
+
+    .movie-synopsis {
+        font-size: 0.9rem !important;
+    }
+
+    .release-date {
+        font-size: 0.75rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    .btn-primary {
+        font-size: 1.1rem !important;
+        padding: 0.75rem 1.5rem !important;
+    }
+
+    /* ===== 5. HIDE CUSTOM CURSOR on touch devices ===== */
+    .custom-cursor {
+        display: none !important;
+    }
+
+    body, a, button {
+        cursor: auto !important;
+    }
 }
 
 @media (max-width: 480px) {
