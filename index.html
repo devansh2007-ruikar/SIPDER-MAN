@@ -121,17 +121,6 @@
         <div id="loading-counter" class="preloader-counter">0%</div>
     </div>
 
-<!-- Cinematic Video Background & Overlay -->
-<div class="video-bg-container">
-    <video id="hero-bg-video" loop muted playsinline poster="assets/images/hero-poster.jpg">
-        <source src="assets/videos/trailer.mp4" type="video/mp4">
-        <source src="assets/%20videos/trailer.mp4" type="video/mp4">
-        Your browser does not support HTML5 background video.
-    </video>
-    <!-- Dark Gradient & Vignette Overlay -->
-    <div class="video-overlay"></div>
-</div>
-
 <!-- Sleek Audio Controller Button -->
 <button id="audio-toggle-btn" class="audio-toggle-btn" aria-label="Toggle Background Audio">
     <span class="sound-wave" aria-hidden="true">
@@ -172,6 +161,17 @@
 <!-- Hero Section -->
 <main>
     <section class="hero-section">
+        <!-- Cinematic Video Background & Overlay (inside hero so it scrolls away) -->
+        <div class="video-bg-container">
+            <video id="hero-bg-video" loop muted playsinline poster="assets/images/hero-poster.jpg">
+                <source src="assets/videos/trailer.mp4" type="video/mp4">
+                <source src="assets/%20videos/trailer.mp4" type="video/mp4">
+                Your browser does not support HTML5 background video.
+            </video>
+            <!-- Dark Gradient & Vignette Overlay -->
+            <div class="video-overlay"></div>
+        </div>
+
         <!-- The Premium Glass Card -->
         <div class="glass-card hero-content">
             <p class="release-date">In Theaters July 31</p>
