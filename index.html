@@ -261,20 +261,26 @@
 
     <!-- Outro Section (Allows user to scroll out of the pin) -->
     <section class="timeline-outro"
-        style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #030303; position: relative; z-index: 2;">
-        <h2 class="section-title reveal">Brand New Day</h2>
-        <div class="title-underline reveal"></div>
-        <p class="reveal" style="margin-top: 1.5rem; color: var(--text-muted); font-size: 1.2rem;">Coming this July
-            31.</p>
+        style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #030303; position: relative; z-index: 2; overflow: hidden;">
+        
+        <!-- WebGL Interaction Canvas -->
+        <canvas id="interaction-canvas"></canvas>
 
-        <!-- Final Call to Action -->
-        <div class="final-cta-container reveal">
-            <a href="https://in.bookmyshow.com/" target="_blank" class="btn-primary" rel="noopener noreferrer">
-                <span class="btn-text">Book Now</span>
-                <span class="btn-glow"></span>
-            </a>
-            <a href="https://youtu.be/62bIsvRcPv0?si=NhN-lDIJBlBQTSW4" target="_blank" rel="noopener noreferrer"
-                class="btn-secondary">Watch Trailer</a>
+        <div class="outro-content-wrapper" style="position: relative; z-index: 10;">
+            <h2 class="section-title reveal">Brand New Day</h2>
+            <div class="title-underline reveal"></div>
+            <p class="reveal" style="margin-top: 1.5rem; color: var(--text-muted); font-size: 1.2rem;">Coming this July
+                31.</p>
+
+            <!-- Final Call to Action -->
+            <div class="final-cta-container reveal">
+                <a href="https://in.bookmyshow.com/" target="_blank" class="btn-primary" rel="noopener noreferrer">
+                    <span class="btn-text">Book Now</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="https://youtu.be/62bIsvRcPv0?si=NhN-lDIJBlBQTSW4" target="_blank" rel="noopener noreferrer"
+                    class="btn-secondary">Watch Trailer</a>
+            </div>
         </div>
     </section>
 </main>
@@ -287,6 +293,8 @@
 <script src="js/hold-action.js"></script>
 <script src="js/preloader.js"></script>
 <script src="js/particle-logo.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/interaction-fluid.js"></script>
 
 <!-- Custom Global Cursor -->
 <div class="custom-cursor">
